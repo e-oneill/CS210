@@ -1,6 +1,5 @@
 import java.util.*;
-
-public class Outlier {
+public class LCM {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -14,18 +13,29 @@ public class Outlier {
         sc.close();
 
         arr =  bubbleSort(arr);
-
-        if (arr[1] - arr[0] > arr[2] - arr[1])
+        if (arr[0] + arr[1] + arr[2] == 0)
         {
-            System.out.println(arr[0]);
+            System.out.println("0");
         }
-        else if (arr[1] - arr[0] == arr[2] - arr[1])
+        else if (arr[0] * arr[1] <= 0 || arr[1] * arr[2] <= 0 || arr[0] * arr[2] <= 0)
         {
             System.out.println("NA");
         }
         else
-        {
-            System.out.println(arr[2]);
+        {   
+            boolean multipleFound = false;
+            //If LCM includes the the value of the three numbers x = 1, otherwise x = 2
+            int x = 1;
+            while(!multipleFound)
+            {
+                int currMult = arr[2] * x;
+                if (currMult % arr[0] == 0 && currMult % arr[1] == 0)
+                {
+                    System.out.println(currMult);
+                    multipleFound = true;
+                }
+                x++;
+            }
         }
     }
 
@@ -51,7 +61,6 @@ public class Outlier {
                 break;
             }
         }
-
         return arr;
     }
 }
