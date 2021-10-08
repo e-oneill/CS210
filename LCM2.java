@@ -7,8 +7,12 @@ public class LCM2 {
         for (int i = 0; i < nums.length; i++)
         {
             nums[i] = sc.nextLong();
+            if (nums[i] < 0)
+            {
+                nums[i] = nums[i] * - 1;
+            }
         }
-
+        sc.close();
         nums = bubbleSort(nums);
 
         if (nums[0] == 0 && nums[1] == 0 && nums[2] == 0)
