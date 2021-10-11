@@ -9,11 +9,13 @@ public class LCM2 {
             nums[i] = sc.nextLong();
             if (nums[i] < 0)
             {
+                //If the provided number is a negative number, flip to positive 
+                //(assuming test cases assume we check the absolute value)
                 nums[i] = nums[i] * - 1;
             }
         }
         sc.close();
-        nums = bubbleSort(nums);
+        // nums = bubbleSort(nums);
 
         if (nums[0] == 0 && nums[1] == 0 && nums[2] == 0)
         {
@@ -43,28 +45,31 @@ public class LCM2 {
         else return (getGreatestCommonDivisor(b, a%b));
     }
 
-    public static long[] bubbleSort(long[] arr)
-    {
-        int leng = arr.length;
+    //region bubble sort function (may not be needed for algorithm)
+    // public static long[] bubbleSort(long[] arr)
+    // {
+    //     int leng = arr.length;
 
-        for (int i = 0; i < leng -1; i++)
-        {
-            boolean swapped = false;
-            for (int j = 0; j < leng - i - 1; j++)
-            {
-                if (arr[j] > arr[j+1])
-                {
-                    long temp = arr[j+1];
-                    arr[j+1] = arr[j];
-                    arr[j] = temp;
-                    swapped = true;
-                }
-            }
-            if (!swapped)
-            {
-                break;
-            }
-        }
-        return arr;
-    }
+    //     for (int i = 0; i < leng -1; i++)
+    //     {
+    //         boolean swapped = false;
+    //         for (int j = 0; j < leng - i - 1; j++)
+    //         {
+    //             if (arr[j] > arr[j+1])
+    //             {
+    //                 long temp = arr[j+1];
+    //                 arr[j+1] = arr[j];
+    //                 arr[j] = temp;
+    //                 swapped = true;
+    //             }
+    //         }
+    //         if (!swapped)
+    //         {
+    //             break;
+    //         }
+    //     }
+    //     return arr;
+    // }
+    //endregion;
+
 }
