@@ -12,12 +12,12 @@ public class Lab3 {
         //this method fills the array with false, where the number is not a prime
         primes = getPrimes(primes);
         //if num is not prime, find the previous
+        int prevPrime = num;
         if (!isPrime(num, primes)) { 
-            int prevPrime = findPreviousPrime(num, primes);
-            System.out.println(prevPrime);
+            prevPrime = findPreviousPrime(num, primes);
         }
         int nextPrime = findSubsequentPrime(num, primes);
-        System.out.println(nextPrime);
+        System.out.println(nextPrime-prevPrime);
     }
 
     public static boolean[] getPrimes(boolean[] arr)
