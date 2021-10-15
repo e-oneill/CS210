@@ -6,7 +6,7 @@
       <class name="Lab3Test">
         <methods>
           <include name="beforeMethod"/>
-          <include name="f"/>
+          <include name="testDifference"/>
         </methods>
       </class> <!-- Lab3Test -->
     </classes>
