@@ -35,30 +35,52 @@ public class MonteCarloSimulation {
         // endregion;
         
         //region HashSet method
-        Set<Integer> pupils = new HashSet<Integer>();
+        List<Integer> pupils = new ArrayList<Integer>();
         Random rand = new Random();
-        int innerCollisions = 0;
+        
             for (int i = 0; i < n; i++)
             {
+                int innerCollisions = 0;
                 int birthday = rand.nextInt(364);
                 Integer integer = Integer.valueOf(birthday);
+
                 if (pupils.contains(integer)){
                     innerCollisions++;
-                    if (innerCollisions >= x-1){
-                        innerCollisions = 0;
-                        collisions++;
-                        break;
+                
+                    for (int j = 1; j <= x; j++)
+                    {
+                        if (innerCollisions >= x-1){
+                            
+                            collisions++;
+                            // System.out.println("Collision found " + integer);
+                            // pupils.add(integer);
+                            break;
                         }
+                        List<Integer> subPupils = new ArrayList<Integer>();
+                        subPupils = pupils.subList(pupils.indexOf(integer)+1, pupils.size());
+                        if (subPupils.contains(integer)) {
+                            innerCollisions++;
+                        } else {
+                            break;
+                        }
+                    }
+                    if (innerCollisions >=x-1 && collisions > 0)
+                    {
+                        innerCollisions = 0;
+                        break;
+                    }
                 } 
                 pupils.add(integer);
             }
         
-
+            // System.out.println(pupils.toString());
         }
 
         float prob = (float)collisions / t;
         int probInt = (int) (prob*100);
         System.out.println("After " + t + " tests we had " + collisions + " collisions, result in probability of: " + probInt + "%");
+
+        
     }
 
     public static int[] generateRandomBirthdays(int n)
