@@ -33,6 +33,21 @@ public class Lab3Test {
       { 4, 2, 3}
     };
   }
+  
+  @DataProvider (name="CalcDiff")
+  public Object[][] calcdiff() {
+	    return new Object[][] {
+	      { 1, 7, 4},
+	      { 2, 10, 4},
+	      { 3, 2, 1},
+	      { 4, 1000, 12}
+	    };
+	  }
+  
+  @Test (dataProvider = "CalcDiff")
+  public void testDifference(int id, int num, int expected) {
+	  assertEquals(Lab3.calculateDifference(num),expected);
+  }
 
   @Test (dataProvider = "notPrime")
   public void testNotPrime(int id, int bound, int expectedPrev, int expectedSubs) {

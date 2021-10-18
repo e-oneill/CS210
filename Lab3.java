@@ -7,7 +7,14 @@ public class Lab3 {
         Scanner sc = new Scanner(System.in);
         int num = sc.nextInt();
         sc.close();
-        //defining the boolean array. 21 is added to num as the largest gap between two primes in the working set is 20. 
+         
+        
+        System.out.println(calculateDifference(num));
+
+    }
+    
+    public static int calculateDifference(int num) {
+    	//defining the boolean array. 21 is added to num as the largest gap between two primes in the working set is 20.
         boolean[] primes = new boolean[num+21];
         //this method fills the array with false, where the number is not a prime
         primes = getPrimes(primes);
@@ -17,7 +24,7 @@ public class Lab3 {
             prevPrime = findPreviousPrime(num, primes);
         }
         int nextPrime = findSubsequentPrime(num, primes);
-        System.out.println(nextPrime-prevPrime);
+        return (nextPrime-prevPrime);
     }
 
     public static boolean[] getPrimes(boolean[] arr)
