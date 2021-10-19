@@ -2,11 +2,13 @@ import java.util.*;
 
 public class MonteCarloSimulation {
     public static void main(String[] args) {
+        
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
         int x = sc.nextInt();
         int t = 30000;
+        long start = System.currentTimeMillis();
         int collisions = 0;
         sc.close();
         for (int r = 0; r < t; r++){
@@ -48,9 +50,10 @@ public class MonteCarloSimulation {
         }
 
         float prob = (float)collisions / t;
-        int probInt = (int) (prob*100);
+        int probInt = Math.round(prob*100);
         System.out.println("After " + t + " tests we had " + collisions + " collisions, resulting in a probability of: " + probInt + "%");
-
-        
+        long time = System.currentTimeMillis() - start;
+        double seconds = ((double) time) / 1000.00;
+        System.out.println("Time to run: " + seconds + " seconds");
     }
 }
