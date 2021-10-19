@@ -7,7 +7,7 @@ public class MonteCarloSimulation {
 
         int n = sc.nextInt();
         int x = sc.nextInt();
-        int t = 30000;
+        int t = 100000;
         long start = System.currentTimeMillis();
         int collisions = 0;
         sc.close();
