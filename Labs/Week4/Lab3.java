@@ -1,3 +1,5 @@
+package Labs.Week4;
+
 import java.util.*;
 public class Lab3 {
     public static void main(String[] args) {
