@@ -13,14 +13,16 @@ public class ScrabbleSort {
         for (int i = 0; i < n; i ++)
         {
             wordArray[i] = sc.nextLine();
-            scoreArray[i] = scrabbleScore(wordArray[i]);
+            // scoreArray[i] = scrabbleScore(wordArray[i]);
         }
 
-        for (int i = 0; i < n; i ++)
-        {
-            System.out.print(scoreArray[i] + " ");
-        }
+        // for (int i = 0; i < n; i ++)
+        // {
+        //     System.out.print(scoreArray[i] + " ");
+        // }
         sc.close();
+
+        sortByScrabbleScore(wordArray);
     }
 
     public static int scrabbleScore(String word) {
@@ -33,4 +35,32 @@ public class ScrabbleSort {
 
         return score;
     }
+
+    public static void sortByScrabbleScore(String[] arr) {
+        for (int outer = 1; outer < arr.length; outer++)
+        {
+            String temp = arr[outer];
+            int inner = outer;
+            while ( inner > 0 && scrabbleScore(arr[inner-1]) >= scrabbleScore(temp))
+            {
+                if (scrabbleScore(arr[inner-1]) == scrabbleScore(temp))
+                {
+                    if (arr[inner-1].charAt(0) <= temp.charAt(0))
+                    {
+                        break;
+                    }
+                }
+                arr[inner] = arr[inner - 1];
+                inner--;
+            }
+            arr[inner] = temp;
+        }
+
+        for (int i = 0; i < arr.length; i++)
+        {
+            System.out.print(arr[i] + " (" + scrabbleScore(arr[i]) + ") ");
+        }
+    }
+
+
 }
