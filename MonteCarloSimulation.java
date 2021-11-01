@@ -54,6 +54,6 @@ public class MonteCarloSimulation {
         System.out.println("After " + t + " tests we had " + collisions + " collisions, resulting in a probability of: " + probInt + "%");
         long time = System.currentTimeMillis() - start;
         double seconds = ((double) time) / 1000.00;
-        System.out.println("Time to run: " + seconds + " seconds");
+        System.out.println("Runtime: " + seconds + " seconds");
     }
 }
