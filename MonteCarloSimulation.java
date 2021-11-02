@@ -5,55 +5,55 @@ public class MonteCarloSimulation {
         
         Scanner sc = new Scanner(System.in);
 
-        int n = sc.nextInt();
-        int x = sc.nextInt();
-        int t = 60000;
-        long start = System.currentTimeMillis();
+        final int n = sc.nextInt();
+        final int x = sc.nextInt() - 1;
+        final int t = 177000;
+        // long start = System.currentTimeMillis();
         int collisions = 0;
-        sc.close();
-        for (int r = 0; r < t; r++){
-        //region ArrayList method
-        List<Integer> pupils = new ArrayList<Integer>();
+        // sc.close();
         Random rand = new Random();
-        
-            for (int i = 0; i < n; i++)
+        if (x == 0)
+        {
+            System.out.println("100");
+        }
+        else if (n == 0)
+        {
+            System.out.println("0");
+        }
+        else
+        {
+            for (int r = 0; r < t; r++)
             {
-                int innerCollisions = 0;
-                int birthday = rand.nextInt(364);
-                Integer integer = Integer.valueOf(birthday);
-
-                if (pupils.contains(integer)){
-                    innerCollisions++;
-                    List<Integer> subPupils = new ArrayList<Integer>();
-                    subPupils = pupils.subList(pupils.indexOf(integer)+1, pupils.size());
-                    for (int j = 1; j <= x; j++)
+            //region ArrayList method
+            // List<Integer> pupils = new ArrayList<Integer>();
+            int[] pupils = new int[365];
+            
+                for (int i = 0; i < n; i++)
+                { 
+                    Integer integer = rand.nextInt(364);
+                    pupils[integer]++;
+                    if (pupils[integer] == x+1) 
                     {
-                        if (innerCollisions >= x-1){
-                            collisions++;
-                            break;
-                        }
-                        if (subPupils.contains(integer)) {
-                            innerCollisions++;
-                        } else {
-                            break;
-                        }
-                        subPupils = subPupils.subList(subPupils.indexOf(integer)+1, subPupils.size());
-                    }
-                    if (innerCollisions >=x-1 && collisions > 0)
-                    {
-                        innerCollisions = 0;
+                        collisions++; 
                         break;
                     }
-                } 
-                pupils.add(integer);
+                    
+                    // if (pupils.contains(integer))
+                    // {
+                    //     if (Collections.frequency(pupils, integer) >= x) 
+                    //     {
+                    //         collisions++;
+                    //         break;
+                    //     }
+                    // }
+                    // pupils.add(integer);
+                }
             }
+            // float prob = ;
+        System.out.println(Math.round(((float) collisions / t) * 100));
         }
+        
+        
 
-        float prob = (float)collisions / t;
-        int probInt = Math.round(prob*100);
-        System.out.println("After " + t + " tests we had " + collisions + " collisions, resulting in a probability of: " + probInt + "%");
-        long time = System.currentTimeMillis() - start;
-        double seconds = ((double) time) / 1000.00;
-        System.out.println("Runtime: " + seconds + " seconds");
     }
 }
