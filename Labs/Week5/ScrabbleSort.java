@@ -9,17 +9,10 @@ public class ScrabbleSort {
         Scanner sc = new Scanner(System.in);
         int n = Integer.parseInt(sc.nextLine());
         wordArray = new String[n];
-        scoreArray = new int[n];
         for (int i = 0; i < n; i ++)
         {
             wordArray[i] = sc.nextLine();
-            // scoreArray[i] = scrabbleScore(wordArray[i]);
         }
-
-        // for (int i = 0; i < n; i ++)
-        // {
-        //     System.out.print(scoreArray[i] + " ");
-        // }
         sc.close();
 
         sortByScrabbleScore(wordArray);
@@ -31,21 +24,26 @@ public class ScrabbleSort {
         {
             score += values[(int) (word.charAt(i))-97];
         }
-        
-
         return score;
     }
 
-    public static void sortByScrabbleScore(String[] arr) {
+    public static void sortByScrabbleScore(String[] arr) 
+    {
         for (int outer = 1; outer < arr.length; outer++)
         {
             String temp = arr[outer];
             int inner = outer;
             while ( inner > 0 && scrabbleScore(arr[inner-1]) >= scrabbleScore(temp))
             {
-                if (scrabbleScore(arr[inner-1]) == scrabbleScore(temp))
+                if (scrabbleScore(arr[inner-1]) == scrabbleScore(temp) && arr[inner-1].charAt(0) <= temp.charAt(0))
                 {
-                    if (arr[inner-1].charAt(0) <= temp.charAt(0))
+                //Handling alphabetical order when two words have same score
+                    int j = 0;
+                    while (arr[inner-1].charAt(j) == temp.charAt(j))
+                    {
+                        j++;
+                    }
+                    if (arr[inner-1].charAt(j) < temp.charAt(j))
                     {
                         break;
                     }
@@ -58,7 +56,7 @@ public class ScrabbleSort {
 
         for (int i = 0; i < arr.length; i++)
         {
-            System.out.print(arr[i] + " (" + scrabbleScore(arr[i]) + ") ");
+            System.out.println(arr[i]);
         }
     }
 
