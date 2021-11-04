@@ -6,6 +6,7 @@ public class ScrabbleSort {
     static int[] values = {1,3,3,2,1,4,2,4,1,8,5,1,3,1,1,3,10,1,1,1,1,4,4,8,4,10};
 
     public static void main(String[] args) {
+        //Init and data input
         Scanner sc = new Scanner(System.in);
         int n = Integer.parseInt(sc.nextLine());
         wordArray = new String[n];
@@ -15,7 +16,14 @@ public class ScrabbleSort {
         }
         sc.close();
 
+        //Sort array
         sortByScrabbleScore(wordArray);
+        //Print sorted array
+        for (int i = 0; i < n; i++)
+        {
+            System.out.print(wordArray[i] + " (" + scrabbleScore(wordArray[i]) + ") ");
+            // System.out.println(arr[i]);
+        }
     }
 
     public static int scrabbleScore(String word) {
@@ -38,12 +46,7 @@ public class ScrabbleSort {
                 if (scrabbleScore(arr[inner-1]) == scrabbleScore(temp) && arr[inner-1].charAt(0) <= temp.charAt(0))
                 {
                 //Handling alphabetical order when two words have same score
-                    int j = 0;
-                    while (arr[inner-1].charAt(j) == temp.charAt(j))
-                    {
-                        j++;
-                    }
-                    if (arr[inner-1].charAt(j) < temp.charAt(j))
+                    if (arr[inner-1].compareTo(temp) < 0)
                     {
                         break;
                     }
@@ -53,11 +56,8 @@ public class ScrabbleSort {
             }
             arr[inner] = temp;
         }
+        
 
-        for (int i = 0; i < arr.length; i++)
-        {
-            System.out.println(arr[i]);
-        }
     }
 
 
