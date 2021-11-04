@@ -21,8 +21,8 @@ public class ScrabbleSort {
         //Print sorted array
         for (int i = 0; i < n; i++)
         {
-            System.out.print(wordArray[i] + " (" + scrabbleScore(wordArray[i]) + ") ");
-            // System.out.println(arr[i]);
+            // System.out.print(wordArray[i] + " (" + scrabbleScore(wordArray[i]) + ") ");
+            System.out.println(wordArray[i]);
         }
     }
 
@@ -43,10 +43,10 @@ public class ScrabbleSort {
             int inner = outer;
             while ( inner > 0 && scrabbleScore(arr[inner-1]) >= scrabbleScore(temp))
             {
-                if (scrabbleScore(arr[inner-1]) == scrabbleScore(temp) && arr[inner-1].charAt(0) <= temp.charAt(0))
+                if (scrabbleScore(arr[inner-1]) == scrabbleScore(temp))
                 {
                 //Handling alphabetical order when two words have same score
-                    if (arr[inner-1].compareTo(temp) < 0)
+                    if (arr[inner-1].compareToIgnoreCase(temp) < 0)
                     {
                         break;
                     }
@@ -55,10 +55,6 @@ public class ScrabbleSort {
                 inner--;
             }
             arr[inner] = temp;
-        }
-        
-
+        } 
     }
-
-
 }
