@@ -1,13 +1,13 @@
 package Labs.Week6;
 import java.util.*;
 public class Stack { //remove public when this is in the same file as the main class for completing the lab
-        static int top;
-        static HashMap stack;
+        int top;
+        HashMap stackTemp;
         //Default Constructor creates a HashMap of Integers
         public Stack()
         {
             top = 0;
-            stack = new HashMap<Integer,Integer>();
+            stackTemp = new HashMap<Integer,Integer>();
         }
         //Constructor takes a parameter that defines the datatype to be stored in the stack.
         public Stack(String dataType)
@@ -15,60 +15,60 @@ public class Stack { //remove public when this is in the same file as the main c
             top = 0;
             if (dataType.toLowerCase().equals("int") || dataType.toLowerCase().equals("integer") )
             {
-                stack = new HashMap<Integer, Integer>();
+                stackTemp = new HashMap<Integer, Integer>();
             }
             else if (dataType.toLowerCase().equals("string"))
             {
-                stack = new HashMap<Integer,String>();
+                stackTemp = new HashMap<Integer,String>();
             }
             else if (dataType.toLowerCase().equals("long"))
             {
-                stack = new HashMap<Integer,Long>();
+                stackTemp = new HashMap<Integer,Long>();
             }
             else 
             {
-                stack = new HashMap<Object, Object>();
+                stackTemp = new HashMap<Object, Object>();
             }
         }
         
         public void push(int j) 
         {
-            int top = stack.size();
-            stack.put(top, j);
+            int top = stackTemp.size();
+            stackTemp.put(top, j);
         }
 
         public void push(String j)
         {
-            int top = stack.size();
-            stack.put(top, j);
+            int top = stackTemp.size();
+            stackTemp.put(top, j);
         }
 
         public void push(Long j)
         {
-            int top = stack.size();
-            stack.put(top, j);
+            int top = stackTemp.size();
+            stackTemp.put(top, j);
         }
     
         public void pop()
         {
-            int top = stack.size();
-            stack.remove(top-1);
+            int top = stackTemp.size();
+            stackTemp.remove(top-1);
         }
     
         public Object peek()
         {
-            int top = stack.size();
-            return stack.get(top-1);
+            int top = stackTemp.size();
+            return stackTemp.get(top-1);
         }
     
         public void clear()
         {
-            stack.clear();
+            stackTemp.clear();
         }
     
         public String toString()
         {
-            int top = stack.size();
+            int top = stackTemp.size();
             String str = "";
             if (top > 0)
             {
@@ -76,11 +76,11 @@ public class Stack { //remove public when this is in the same file as the main c
                 {
                     if (str == "")
                     {
-                        str += stack.get(i);
+                        str += stackTemp.get(i);
                     }
                     else 
                     {
-                        str += " " + stack.get(i);
+                        str += " " + stackTemp.get(i);
                     }
                 }
             }

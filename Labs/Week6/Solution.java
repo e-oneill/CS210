@@ -37,12 +37,10 @@ public class Solution {
 }
 
 class IntStack { 
-    static int top;
-    static HashMap<Integer,Integer> stack;
+    private HashMap<Integer,Integer> stack;
 
     public IntStack()
     {
-        top = 0;
         stack = new HashMap<Integer, Integer>();
     }
 
