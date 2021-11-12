@@ -7,13 +7,19 @@ public class Solution {
         int commands = Integer.parseInt(sc.nextLine());
         // System.out.println(stack.toString());
         for (int i = 0; i < commands; i++)
+        // boolean processing = true;
+        // while (processing)
         {
             String command = sc.nextLine();
-
-            if (command.toLowerCase().equals("pop"))
+            if (command.isEmpty())
+            {
+                // processing=false;
+            }
+            else if (command.toLowerCase().equals("pop"))
             {
                 stack.pop();
             }
+            
             else if (command.toLowerCase().equals("clear"))
             {
                 stack.clear();
@@ -30,7 +36,8 @@ public class Solution {
             // System.out.println(stack.toString());  
         }
 
-        System.out.println(stack.peek());
+        sc.close();
+        stack.peek();
 
         
     }
@@ -53,13 +60,23 @@ class IntStack {
     public void pop()
     {
         int top = stack.size();
+        if (top > 0)
+        {
         stack.remove(top-1);
+        }
     }
 
-    public int peek()
+    public void peek() 
     {
         int top = stack.size();
-        return stack.get(top-1);
+        if (top > 0) 
+        {
+            System.out.println(stack.get(top-1));
+        }
+        else
+        {
+            System.out.println("empty");
+        }
     }
 
     public void clear()

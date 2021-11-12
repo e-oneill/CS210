@@ -20,9 +20,10 @@ public class Lab3 {
         boolean[] primes = new boolean[num+21];
         //this method fills the array with false, where the number is not a prime
         primes = getPrimes(primes);
-        //if num is not prime, find the previous
+                //if num is not prime, find the previous
         int prevPrime = num;
-        if (!isPrime(num, primes)) { 
+        if (!isPrime(num, primes)) 
+        { 
             prevPrime = findPreviousPrime(num, primes);
         }
         int nextPrime = findSubsequentPrime(num, primes);
