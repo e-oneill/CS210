@@ -60,6 +60,7 @@ class Queue {
         if (isEmpty()) return false;
         arr[head] = null;
         head++;
+        
         return true;
     }
 
@@ -74,7 +75,7 @@ class Queue {
 
     public boolean isEmpty()
     {
-        if (rear == -1)
+        if (arr[head] == null)
         {
             return true;
         }
@@ -92,6 +93,9 @@ class Queue {
     public String printMid()
     {
         String output = "";
+        if (!isEmpty())
+        {
+        
         int size = rear - head;
         // for (int i = head; i <= size; i++)
         // {
@@ -100,6 +104,10 @@ class Queue {
 
         int mid = head + (size) / 2;
         output +=  arr[mid];
+        }
+        else{
+            output = "empty";
+        }
         return output;
     }
 
