@@ -17,14 +17,14 @@ public class Solution {
             
             int select = sc.nextInt();
             int previous = sc.nextInt();
-            int next = sc.nextInt();;
+            int next = sc.nextInt();
             if (previous != -1){
                 array[select].previous = array[previous];
             }
             if (next != -1){
                 array[select].next = array[next];
             }
-            sc.nextLine();
+            // sc.nextLine();
         }
         if (num > 0 ) {
             list.first = array[0];
