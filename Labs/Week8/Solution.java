@@ -91,6 +91,11 @@ public class Solution {
             {
                 return 0;
             }
+            if (current.next != null && current.next.previous != current || (current.previous != null && current.previous.next != current))
+            {
+                return 0;
+            }
+            
             if (current.data < smallest)
             {
                 secondSmallest = smallest;

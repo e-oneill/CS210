@@ -84,7 +84,7 @@ class Queue {
 
     public void isFull()
     {
-        if (head == arr.length-1)
+        if (rear == arr.length-1)
         {
             growQueue();
         }
