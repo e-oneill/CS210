@@ -5,13 +5,13 @@ public class RecursiveBirthdayProbability {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         double people = sc.nextDouble();
-        double prob = 1d - recursiveBirthday(people);
+        double prob = 1 - recursiveNotSameBirthday(people);
         double rounded = Math.round(prob * 1000) / 1000d;
         System.out.println(rounded);
         sc.close();
     }
 
-    public static double recursiveBirthday(double people)
+    public static double recursiveNotSameBirthday(double people)
     {
         if (people == 1)
         {
@@ -19,7 +19,7 @@ public class RecursiveBirthdayProbability {
         }
         else 
         {
-            return recursiveBirthday(people - 1) * (1 - (people-1)/365);
+            return recursiveNotSameBirthday(people - 1) * (1 - (people-1)/365);
         }
     }
 }
