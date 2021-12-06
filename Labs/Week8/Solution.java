@@ -105,7 +105,7 @@ public class Solution {
             current = current.next;
             
         }
-
+        if (secondSmallest == Integer.MAX_VALUE) { secondSmallest = -1;}
         return secondSmallest;
     }
 }
