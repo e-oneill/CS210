@@ -12,7 +12,7 @@ public class RecursiveBirthdayProbability {
         }
         else if (people > 0) 
         {
-            prob = 1d - recursiveBirthday(people);
+            prob = 1d - recursiveNotSameBirthday(people);
             
         }
 
@@ -21,18 +21,15 @@ public class RecursiveBirthdayProbability {
         sc.close();
     }
 
-    public static double recursiveBirthday(int people)
+    public static double recursiveNotSameBirthday(double people)
     {
         if (people == 1)
         {
             return 1d;
         }
-
-        int x = people - 1;
-        double value = (1 - (people-1)/365d);
-
-
-            return recursiveBirthday(x) * value;
-
+        else 
+        {
+            return recursiveNotSameBirthday(people - 1) * (1 - (people-1)/365);
+        }
     }
 }
