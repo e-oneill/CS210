@@ -4,19 +4,19 @@ import java.util.*;
 public class RecursiveBirthdayProbability {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        double people = sc.nextDouble();
-        double rounded = 0;
+        int people = sc.nextInt();
+        double prob = 0;
         if (people > 365)
         {
-            rounded = 1;
+            prob = 1.000;
         }
         else if (people > 0) 
         {
-            double prob = 1d - recursiveNotSameBirthday(people);
-            rounded = Math.round(prob * 1000) / 1000d;
+            prob = 1d - recursiveNotSameBirthday(people);
+            
         }
 
-        
+        double rounded = Math.round(prob * 1000) / 1000d;
         System.out.println(rounded);
         sc.close();
     }
