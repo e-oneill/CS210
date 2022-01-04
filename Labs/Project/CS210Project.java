@@ -13,20 +13,20 @@ public class CS210Project {
         Random rand = new Random();
         // System.out.println(dict.getSize());
         //Bounds sets the number of strings to be generated
-        int bound = 7500;
-        int words = 6;
+        int bound = 9000;
+        int words = 4;
 
         //These three variables will be used to track the most matches found
         int score = 0;
         String string1 = "";
         String string2 = "";
-
+        int randBound = dict.getSize();
         for (int i = 0; i < bound; i++)
         {
             String sentence = "";
             for (int j = 0; j < words; j++)
             {
-                int seed = rand.nextInt(466550);
+                int seed = rand.nextInt(randBound);
                 String word = dict.getWord(seed);
                 word = word.substring(0, word.length()-1);
                 if (j == 0)
@@ -52,24 +52,32 @@ public class CS210Project {
             strings.put(sentence, hash);
         }
 
-        for (Map.Entry<String, String> m : strings.entrySet()) {
+        Iterator<Map.Entry<String, String>> iter = strings.entrySet().iterator();
+
+        while (iter.hasNext()) {
+            Map.Entry<String, String> m = iter.next();
+            String mHash = m.getValue();
             for (Map.Entry<String, String> s: strings.entrySet())
             {
                 
-                if (m.getKey() != s.getKey())
+                // System.out.println("Current element: " + m.getKey());
+                if (mHash != s.getValue())
                 {
-                    int counter = 0;
-                    String mHash = m.getValue();
+                    
+                    // int counter = 0;
+                    
                     String sHash = s.getValue();
 
-                    for (int i = 0; i < mHash.length(); i++)
-                    {
-                        if (mHash.charAt(i) == sHash.charAt(i))
-                        {
-                            counter++;
-                        }
+                    // for (int i = 0; i < mHash.length(); i++)
+                    // {
+                    //     if (mHash.charAt(i) == sHash.charAt(i))
+                    //     {
+                    //         counter++;
+                    //     }
                         
-                    }
+                    // }
+
+                    int counter = compareStrings(mHash, sHash);
 
                     if (counter > score)
                         {
@@ -79,12 +87,14 @@ public class CS210Project {
                         }
                 }
             }
-            
+            // strings.remove(m.getKey());
+            iter.remove();
         }
         System.out.println("The closest hash found was " + score + "\nBetween:\n" + string1 + "\nAND\n" + string2 );
     }
 
-    public static String sha256(String input){
+    public static String sha256(String input)
+    {
         try{
             MessageDigest mDigest = MessageDigest.getInstance("SHA-256");
             byte[] salt = "CS210+".getBytes("UTF-8");
@@ -98,5 +108,19 @@ public class CS210Project {
         }catch(Exception e){
             return(e.toString());
         }
+    }
+
+    public static int compareStrings(String one, String two)
+    {
+        int score = 0, i = 0, j = 0;
+        char v1[] = new char[64];
+        char v2[] = new char[64];
+        one.getChars(0, 64, v1, 0);
+        two.getChars(0, 64, v2, 0);
+        if (v1[i++] == v2[j++])
+        {
+            score++;
+        }
+        return score;
     }
 }
