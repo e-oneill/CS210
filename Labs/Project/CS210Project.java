@@ -5,17 +5,17 @@ import java.security.*;
 
 public class CS210Project {
     // CREATING THE HIGH LEVEL STATIC VARIABLES THAT WILL DRIVE THE EXECUTION
-    // Using a hashmap to store original string as key and hashed string as value
-    public static final HashMap<String, HashString> strings = new HashMap<String, HashString>();
-
     public static Dictionary dict = new Dictionary();
     // Number of rows in words.txt that contain nouns
-    public static int nouns = 202;
-    // Number of rows in words.txt that contain verbs
+    public static int nouns = 842;
+    // Number of rows in words.txt that contain verbs - some verbs contain sentence
+    // chunks to help them make sense
     public static int verbs = 62;
     // Number of rows in words.txt that contain adjectives
     public static int adjectives = 145;
-    public static int bound = 90000;
+    // Number of random sentences to be generated
+    public static int bound = 120000;
+
     // Arrays to hold the sentence and hash
     public static String[] sentenceArray = new String[bound];
     public static HashString[] hashArray = new HashString[bound];
@@ -23,13 +23,14 @@ public class CS210Project {
     public static void main(String[] args) {
 
         // region
-
+        boolean debugMode = true; // boolean for enabling and disabling debug variables and strings
         long CurrTime;
         long startTime = System.currentTimeMillis();
         long lastTime = startTime;
+        // Debug variables used to track the execution of the program
         int tracker = 0;
         int percentTracker = 0;
-
+        int duplicates = 0;
         // These three variables will be used to track the most matches found
         int score = 0;
         String string1 = "";
@@ -46,13 +47,18 @@ public class CS210Project {
             sentenceArray[i] = sentence;
             hashArray[i] = hash;
         }
+        if (debugMode) {
+            System.out.println("Hashmap Constructed"); // Notify user that we are moving to iteration phase of the programme
+        }
 
-        System.out.println("Hashmap Constructed"); // Notify user that we are moving to iteration phase of the programme
         for (int i = 0; i < bound; i++) {
             HashString hash1 = hashArray[i];
             for (int j = i + 1; j < bound; j++) {
-                if (sentenceArray[i].equals(sentenceArray[j]))
-                {
+                if (sentenceArray[i].equals(sentenceArray[j])) {
+                    if (debugMode) {
+                        //increment duplicate tracker
+                        duplicates++;
+                    }
                     continue;
                 }
                 HashString hash2 = hashArray[j];
@@ -67,79 +73,53 @@ public class CS210Project {
                     // equal my current best are output
 
                 }
-                if (matches >= 21) {
+                if (matches >= 21 && debugMode) {
+                    //Print a string whenever a pair meets or betters my current record (manually added)
                     System.out.println("\n" + score + "\nBetween:\n" + sentenceArray[i] + "\nAND\n" + sentenceArray[j]);
                 }
             }
-            tracker++;
-            if (tracker % (bound / 10) == 0) {
-                // This is a debug block of code, for tracking the execution of the program when
-                // it is taking longer
-                CurrTime = System.currentTimeMillis();
-                System.out.println("Finished entry " + tracker + ". Time since start: " + (CurrTime - startTime) / 1000 + " seconds. Time since last 10%: " + (CurrTime - lastTime) / 1000 + " seconds.");
-                lastTime = CurrTime;
-                percentTracker++;
-            } else if (tracker % (bound / 100) == 0) {
-                System.out.print(++percentTracker + "%... ");
+            if (debugMode) {
+                // region This is a debug block of code, for tracking the execution of the
+                // program during larger test runs
+                tracker++;
+                if (tracker % (bound / 10) == 0) {
+
+                    // Measure time since start and construct a string chunk to display this to the
+                    // user for information
+                    CurrTime = System.currentTimeMillis();
+                    long timeSinceStart = CurrTime - startTime;
+                    int seconds = (int) timeSinceStart / 1000;
+                    String sinceStartChunk = "Time since start: " + seconds + " seconds. ";
+                    if (seconds > 60) {
+                        int minutes = seconds / 60;
+                        seconds = seconds % 60;
+                        sinceStartChunk = "Time since start: " + minutes + " minutes, " + seconds + " seconds. ";
+                    }
+                    // Measure time since last 10% block was completed and construct a string chunk
+                    // to display this to the user
+                    long timeSinceLast = CurrTime - lastTime;
+                    seconds = (int) timeSinceLast / 1000;
+                    String sinceLastChunk = "Time since last 10%: " + seconds + " seconds.";
+                    if (seconds > 60) {
+                        int minutes = seconds / 60;
+                        seconds = seconds % 60;
+                        sinceLastChunk = "Time since last 10%: " + minutes + " minutes, " + seconds + " seconds. ";
+                    }
+
+                    System.out.println("Finished entry " + tracker + ". " + sinceStartChunk + sinceLastChunk);
+                    lastTime = CurrTime;
+                    percentTracker++;
+                } else if (tracker % (bound / 100) == 0) {
+                    System.out.print(++percentTracker + "%... ");
+                }
+                // endregion;
             }
+
         }
-        // region Using an iterator to iterate through the hashmap
-        // Iterator<Map.Entry<String, HashString>> iter = strings.entrySet().iterator();
-
-        // while (iter.hasNext()) {
-        // Map.Entry<String, HashString> m = iter.next();
-        // HashString mHash = m.getValue();
-        // // Inner loop - each entry in the hashmap will be tested against every other
-        // // entry
-        // for (Map.Entry<String, HashString> s : strings.entrySet()) {
-
-        // // System.out.println("Current element: " + m.getKey());
-        // if (mHash != s.getValue()) {
-
-        // HashString sHash = s.getValue();
-
-        // int matches = compareHashStrings(mHash, sHash);
-
-        // if (matches > score) {
-        // // if the number of matches between these two strings beats our current
-        // record,
-        // // we overwrite the tracker variables defined at the start
-        // score = matches;
-        // string1 = m.getKey();
-        // string2 = s.getKey();
-        // // this if statement is used to ensure that any matching sentences that beat
-        // or
-        // // equal my current best are output
-
-        // }
-        // if (matches >= 21) {
-        // System.out.println("\n" + score + "\nBetween:\n" + m.getKey() + "\nAND\n" +
-        // s.getKey());
-        // }
-        // }
-        // }
-        // tracker++;
-
-        // if (tracker % (bound / 10) == 0) {
-        // // This is a debug block of code, for tracking the execution of the program
-        // when
-        // // it is taking longer
-        // CurrTime = System.currentTimeMillis();
-        // System.out.println("Finished entry " + tracker + ". Time since start: " +
-        // (CurrTime - startTime) / 1000
-        // + " seconds. Time since last 10%: " + (CurrTime - lastTime) / 1000 + "
-        // seconds.");
-        // lastTime = CurrTime;
-        // } else if (tracker % (bound / 100) == 0) {
-        // System.out.print(++percentTracker + "%... ");
-        // }
-        // iter.remove();
-
-        // }
-        // endregion;
         System.out.println("The closest hash found was " + score + "\nBetween:\n" + string1 + "\nAND\n" + string2);
+        if (debugMode) {System.out.println("Duplicates: " + duplicates);} //print number of duplicates - if more than a small amount, the random generator isn't good enough
     }
-
+    //sha256 function as provided
     public static String sha256(String input) {
         try {
             MessageDigest mDigest = MessageDigest.getInstance("SHA-256");
@@ -172,7 +152,6 @@ public class CS210Project {
                 score++;
             }
         }
-
         return score;
     }
 
