@@ -14,7 +14,7 @@ public class CS210Project {
     // Number of rows in words.txt that contain adjectives
     public static int adjectives = 145;
     // Number of random sentences to be generated
-    public static int bound = 2000000;
+    public static int bound = 500000;
 
     // Arrays to hold the sentence and hash
     public static String[] sentenceArray = new String[bound];
