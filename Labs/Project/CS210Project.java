@@ -14,7 +14,7 @@ public class CS210Project {
     // Number of rows in words.txt that contain adjectives
     public static int adjectives = 145;
     // Number of random sentences to be generated
-    public static int bound = 120000;
+    public static int bound = 2000000;
 
     // Arrays to hold the sentence and hash
     public static String[] sentenceArray = new String[bound];
@@ -22,7 +22,7 @@ public class CS210Project {
 
     public static void main(String[] args) {
 
-        // region
+        // region 
         boolean debugMode = true; // boolean for enabling and disabling debug variables and strings
         long CurrTime;
         long startTime = System.currentTimeMillis();
@@ -73,7 +73,7 @@ public class CS210Project {
                     // equal my current best are output
 
                 }
-                if (matches >= 21 && debugMode) {
+                if (matches >= 22 && debugMode) {
                     //Print a string whenever a pair meets or betters my current record (manually added)
                     System.out.println("\n" + score + "\nBetween:\n" + sentenceArray[i] + "\nAND\n" + sentenceArray[j]);
                 }
