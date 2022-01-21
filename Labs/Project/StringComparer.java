@@ -10,7 +10,7 @@ public class StringComparer {
         String h1 = sha256(s1);
         String h2 = sha256(s2);
         int matches = 0;
-        for (int i = 0; i < s1.length(); i++)
+        for (int i = 0; i < h1.length(); i++)
         {
             if (h1.charAt(i) == h2.charAt(i))
             {

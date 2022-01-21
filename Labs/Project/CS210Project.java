@@ -23,7 +23,7 @@ public class CS210Project {
     public static void main(String[] args) {
 
         // region 
-        boolean debugMode = true; // boolean for enabling and disabling debug variables and strings
+        boolean debugMode = false; // boolean for enabling and disabling debug variables and strings
         long CurrTime;
         long startTime = System.currentTimeMillis();
         long lastTime = startTime;
@@ -73,7 +73,7 @@ public class CS210Project {
                     // equal my current best are output
 
                 }
-                if (matches >= 22 && debugMode) {
+                if (matches >= 22) {
                     //Print a string whenever a pair meets or betters my current record (manually added)
                     System.out.println("\n" + score + "\nBetween:\n" + sentenceArray[i] + "\nAND\n" + sentenceArray[j]);
                 }
@@ -207,7 +207,7 @@ public class CS210Project {
 // underlies the data, as it is private in the String class
 // String is also marked final, so I can't just extend the String class and add
 // a public Getter function
-// This may seem over-the-top, but it led to a 20% decrease in execution time
+// This may seem over-the-top, but it led to a 15% decrease in execution time
 class HashString {
     public byte[] value;
 
